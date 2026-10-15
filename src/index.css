@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+/* Class-based dark mode so the in-app theme toggle (html.dark) drives dark: utilities */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---- DMS brand tokens: single source of truth ---- */
+:root {
+  --brand-navy: #1E2A5A;
+  --brand-navy-dark: #141C3D;
+  --brand-blue: #1E5BB8;
+  --brand-green: #2E9445;
+  --brand-red: #D7262E;
+  --brand-yellow: #F5C518;
+
+  --font-ar: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-en: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-serif: 'Libre Baskerville', Georgia, serif;
+
+  /* Theme-aware semantic tokens (light) */
+  --page-bg: #FAFAF9;
+  --page-fg: #1C1917;
+  --accent: var(--brand-navy);
+  --link: var(--brand-blue);
+  --primary: var(--brand-navy);
+  --primary-hover: var(--brand-navy-dark);
+  --ok: #247A3A;
+  --err: #B81F26;
+  --warn: #8A6A00;
+  --info: var(--brand-blue);
+  --tag-erp: var(--brand-blue);
+  --tag-hms: #247A3A;
+}
+
+html.dark {
+  --page-bg: var(--brand-navy-dark);
+  --page-fg: #F5F5F4;
+  --accent: #AFC0F5;
+  --link: #7FB0F5;
+  --primary: #2F428F;
+  --primary-hover: #3B52AA;
+  --ok: #5CC474;
+  --err: #FF7B80;
+  --warn: #F5C518;
+  --info: #7FB0F5;
+  --tag-erp: #7FB0F5;
+  --tag-hms: #5CC474;
+}
+
+@theme inline {
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-navy-dark: var(--brand-navy-dark);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-green: var(--brand-green);
+  --color-brand-red: var(--brand-red);
+  --color-brand-yellow: var(--brand-yellow);
+
+  --color-page: var(--page-bg);
+  --color-accent: var(--accent);
+  --color-link: var(--link);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-ok: var(--ok);
+  --color-err: var(--err);
+  --color-warn: var(--warn);
+  --color-info: var(--info);
+  --color-tag-erp: var(--tag-erp);
+  --color-tag-hms: var(--tag-hms);
+
+  /* Dark-theme navy surfaces */
+  --color-night-950: #141C3D;
+  --color-night-900: #1B2551;
+  --color-night-800: #26336B;
+  --color-night-700: #33427F;
+
+  --font-serif: 'Libre Baskerville', Georgia, serif;
+}
+
+@layer base {
+  html[dir="rtl"] {
+    font-family: var(--font-ar);
+  }
+
+  html[dir="rtl"] body {
+    line-height: 1.7;
+  }
+
+  html[dir="ltr"] {
+    font-family: var(--font-en);
+  }
+
+  /* Large English page headlines echo the logo's serif */
+  html[dir="ltr"] h1 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.01em;
+  }
+
+  body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: var(--page-bg);
+    color: var(--page-fg);
+  }
+
+  :where(a:not([class])) {
+    color: var(--link);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--link);
+    outline-offset: 2px;
+  }
+
+  /* Custom subtle scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(120, 113, 108, 0.25);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(120, 113, 108, 0.45);
+  }
+}
+
+.font-mono-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.font-brand-serif {
+  font-family: var(--font-serif);
+}
+
+/* Signature 3px bar: red, yellow, green, blue in equal segments */
+.brand-bar {
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    var(--brand-red) 0 25%,
+    var(--brand-yellow) 25% 50%,
+    var(--brand-green) 50% 75%,
+    var(--brand-blue) 75% 100%
+  );
+}
+
+/* Small diamond bullet / section marker */
+.brand-diamond {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  transform: rotate(45deg);
+  background: var(--brand-yellow);
+  flex-shrink: 0;
+}
+.brand-diamond-red { background: var(--brand-red); }
+.brand-diamond-yellow { background: var(--brand-yellow); }
+.brand-diamond-green { background: var(--brand-green); }
+.brand-diamond-blue { background: var(--brand-blue); }

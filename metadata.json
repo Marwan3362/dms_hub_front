@@ -1,0 +1,8 @@
+{
+  "name": "Remix DMS Developer Network",
+  "description": "Developer and partner ecosystem portal for Data Management Systems SAE (Industrial ERP and Hospital Management System APIs, Sandbox, Marketplace, and Certification).",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
